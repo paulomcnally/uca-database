@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import java.util.UUID;
 
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
@@ -59,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
     private void loadData() {
         // Get a Realm instance for this thread
         Realm realm = Realm.getDefaultInstance();
-        final RealmResults<TweetModel> tweetModels = realm.where(TweetModel.class).findAll();
+        final RealmResults<TweetModel> tweetModels = realm
+                .where(TweetModel.class)
+                .contains("text", "Este").findAll();
 
         Log.i("TAG", "" + tweetModels.size());
 

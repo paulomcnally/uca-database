@@ -54,7 +54,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        //holder.user.setText(tweetModel.getUserModel().getName());
+        // holder.user.setText(tweetModel.getUserModel().getName());
         holder.tweet.setText(tweetModel.getText());
 
     }
