@@ -24,9 +24,10 @@ import uca.database.example.ui.adapters.TweetsAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private static RecyclerView mRecyclerView;
+    private static RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private static MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mainActivity = this;
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         loadData();
     }
 
-    private void loadData() {
+    public static void loadData() {
         // Get a Realm instance for this thread
         Realm realm = Realm.getDefaultInstance();
         final RealmResults<TweetModel> tweetModels = realm
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("TAG", "" + tweetModels.size());
 
         // specify an adapter (see also next example)
-        mAdapter = new TweetsAdapter(tweetModels);
+        mAdapter = new TweetsAdapter(tweetModels, mainActivity);
         mRecyclerView.setAdapter(mAdapter);
     }
 
